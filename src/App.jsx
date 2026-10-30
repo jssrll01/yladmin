@@ -16,10 +16,9 @@ function Screen({ children }) {
   );
 }
 
-// Never returns null forever: every path ends in a screen, a redirect or the app.
 function RequireAdmin() {
   const loc = useLocation();
-  const [state, setState] = useState('checking'); // checking | ok | out | error
+  const [state, setState] = useState('checking');
 
   useEffect(() => {
     let alive = true;
@@ -43,17 +42,10 @@ function RequireAdmin() {
   }, []);
 
   if (state === 'checking') return <Screen>Checking access…</Screen>;
-  if (state === 'error') {
-    return (
-      <Screen>
-        <div style={{ textAlign: 'center' }}>
-          <p>Could not reach the server.</p>
-          <button type="button" onClick={() => window.location.reload()}>Try again</button>
-        </div>
-      </Screen>
-    );
-  }
-  if (state === 'out') return <Navigate to="/login" replace state={{ from: loc.pathname }} />;
+  if (state === 'error') return <Screen><div style={{ textAlign: 'center' }}><p>Could not reach the server.</p><button type="button" onClick={() => window.location.reload()}>Try again</button></div></Screen>;
+  
+  // FIX: This now preserves the #pin=... hash when redirecting unauthenticated users!
+  if (state === 'out') return <Navigate to={`/login${loc.hash}`} replace state={{ from: loc.pathname }} />;
   return <Layout />;
 }
 
