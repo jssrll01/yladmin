@@ -4,6 +4,9 @@ import { supabase } from './supabase';
 import Login from './pages/Login';
 import Layout from './components/Layout';
 import Products from './pages/Products';
+import Offers from './pages/Offers';
+import Codes from './pages/Codes';
+import Vip from './pages/Vip';
 
 function RequireAdmin({ children }) {
   const [loading, setLoading] = useState(true);
@@ -28,9 +31,9 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route element={<RequireAdmin><Layout /></RequireAdmin>}>
         <Route path="/" element={<Products />} />
-        <Route path="/offers" element={<div style={{padding:24}}>Offers module coming next...</div>} />
-        <Route path="/codes" element={<div style={{padding:24}}>Codes module coming next...</div>} />
-        <Route path="/vip" element={<div style={{padding:24}}>VIP module coming next...</div>} />
+        <Route path="/offers" element={<Offers />} />
+        <Route path="/codes" element={<Codes />} />
+        <Route path="/vip" element={<Vip />} />
       </Route>
     </Routes>
   );
