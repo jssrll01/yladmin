@@ -2,13 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
     <title>YUÉLÍN Admin</title>
+    
+    <!-- PWA Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="mask-icon" href="/favicon.svg" color="#FFFFFF" />
+    <meta name="theme-color" content="#e0e5ec" />
   </head>
   <body>
     <div id="root"><p style="font:16px system-ui;padding:24px;color:#555">Loading admin…</p></div>
     <script>
-      // Turns a silent blank page into a readable message.
       (function () {
         function show(m) {
           var r = document.getElementById('root');
