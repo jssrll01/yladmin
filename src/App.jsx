@@ -3,10 +3,18 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { supabase } from './supabase.js';
 import Layout from './components/Layout.jsx';
 import Login from './pages/Login.jsx';
-import Products from './pages/Products.jsx';
-import Offers from './pages/Offers.jsx';
-import Codes from './pages/Codes.jsx';
-import Vip from './pages/Vip.jsx';
+
+// Placeholders for routes until you copy the full components
+const Placeholder = ({ title }) => (
+  <div>
+    <div className="page-header">
+      <h2 style={{ margin: 0, color: 'var(--text-dark)' }}>{title}</h2>
+    </div>
+    <div className="card" style={{ padding: 32 }}>
+      <p>This module is ready to receive the UI from xadmin.</p>
+    </div>
+  </div>
+);
 
 function Screen({ children }) {
   return (
@@ -43,8 +51,6 @@ function RequireAdmin() {
 
   if (state === 'checking') return <Screen>Checking access…</Screen>;
   if (state === 'error') return <Screen><div style={{ textAlign: 'center' }}><p>Could not reach the server.</p><button type="button" onClick={() => window.location.reload()}>Try again</button></div></Screen>;
-  
-  // FIX: This now preserves the #pin=... hash when redirecting unauthenticated users!
   if (state === 'out') return <Navigate to={`/login${loc.hash}`} replace state={{ from: loc.pathname }} />;
   return <Layout />;
 }
@@ -54,10 +60,12 @@ export default function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route element={<RequireAdmin />}>
-        <Route path="/" element={<Products />} />
-        <Route path="/offers" element={<Offers />} />
-        <Route path="/codes" element={<Codes />} />
-        <Route path="/vip" element={<Vip />} />
+        <Route path="/" element={<Placeholder title="Dashboard" />} />
+        <Route path="/products" element={<Placeholder title="Products Management" />} />
+        <Route path="/offers" element={<Placeholder title="Offers & Promos" />} />
+        <Route path="/codes" element={<Placeholder title="Redeem Codes" />} />
+        <Route path="/vip" element={<Placeholder title="VIP Applications" />} />
+        <Route path="/settings" element={<Placeholder title="System Settings" />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
